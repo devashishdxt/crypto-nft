@@ -17,7 +17,7 @@ func TestGenesis(t *testing.T) {
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
-	k, ctx := keepertest.CryptonftKeeper(t)
+	k, ctx := keepertest.CryptonftKeeper(t, nil, nil)
 	cryptonft.InitGenesis(ctx, *k, genesisState)
 	got := cryptonft.ExportGenesis(ctx, *k)
 	require.NotNil(t, got)

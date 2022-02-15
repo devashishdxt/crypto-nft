@@ -8,7 +8,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/store"
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	nftkeeper "github.com/cosmos/cosmos-sdk/x/nft/keeper"
+	"github.com/cosmos/cosmos-sdk/x/nft"
 	typesparams "github.com/cosmos/cosmos-sdk/x/params/types"
 	"github.com/devashishdxt/crypto-nft/x/cryptonft/keeper"
 	"github.com/devashishdxt/crypto-nft/x/cryptonft/types"
@@ -18,7 +18,7 @@ import (
 	tmdb "github.com/tendermint/tm-db"
 )
 
-func CryptonftKeeper(t testing.TB, nftKeeper nftkeeper.Keeper) (*keeper.Keeper, sdk.Context) {
+func CryptonftKeeper(t testing.TB, accountKeeper nft.AccountKeeper, bankKeeper nft.BankKeeper) (*keeper.Keeper, sdk.Context) {
 	storeKey := sdk.NewKVStoreKey(types.StoreKey)
 	memStoreKey := storetypes.NewMemoryStoreKey(types.MemStoreKey)
 
@@ -42,7 +42,8 @@ func CryptonftKeeper(t testing.TB, nftKeeper nftkeeper.Keeper) (*keeper.Keeper, 
 		storeKey,
 		memStoreKey,
 		paramsSubspace,
-		nftKeeper,
+		accountKeeper,
+		bankKeeper,
 	)
 
 	ctx := sdk.NewContext(stateStore, tmproto.Header{}, false, log.NewNopLogger())
