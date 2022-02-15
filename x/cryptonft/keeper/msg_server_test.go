@@ -5,9 +5,9 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-    "github.com/devashishdxt/crypto-nft/x/cryptonft/types"
-    "github.com/devashishdxt/crypto-nft/x/cryptonft/keeper"
-    keepertest "github.com/devashishdxt/crypto-nft/testutil/keeper"
+	keepertest "github.com/devashishdxt/crypto-nft/testutil/keeper"
+	"github.com/devashishdxt/crypto-nft/x/cryptonft/keeper"
+	"github.com/devashishdxt/crypto-nft/x/cryptonft/types"
 )
 
 func setupMsgServer(t testing.TB) (types.MsgServer, context.Context) {
