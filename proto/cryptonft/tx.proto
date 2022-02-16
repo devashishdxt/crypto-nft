@@ -16,6 +16,9 @@ service Msg {
 
     // BurnNFT burns an existing NFT.
     rpc BurnNFT(MsgBurnNFT) returns (MsgBurnNFTResponse);
+    
+    // UpdateNFT updates an existing NFT.
+    rpc UpdateNFT(MsgUpdateNFT) returns (MsgUpdateNFTResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -47,8 +50,11 @@ message MsgNewClass {
   // burnRestricted specifies whether NFT classification restricts burning NFTs by others
   bool burnRestricted = 9;
 
+  // updateRestricted specifies whether NFT classification restricts updating NFTs by others
+  bool updateRestricted = 10;
+
   // data is the app specific metadata of the NFT class. Optional
-  google.protobuf.Any data = 10;
+  google.protobuf.Any data = 11;
 }
 
 message MsgNewClassResponse {
@@ -81,12 +87,40 @@ message MsgMintNFTResponse {
 }
 
 message MsgBurnNFT {
+  // creator defines sender of Burn message
   string creator = 1;
+
+  // classId associated with the NFT, similar to the contract address of ERC721
   string classId = 2;
+
+  // nftId is a unique identifier of the NFT
   string nftId = 3;
 }
 
 message MsgBurnNFTResponse {
+}
+
+message MsgUpdateNFT {
+  // creator defines sender of Update message
+  string creator = 1;
+
+  // classId associated with the NFT, similar to the contract address of ERC721
+  string classId = 2;
+
+  // nftId is a unique identifier of the NFT
+  string nftId = 3;
+
+  // uri for the NFT metadata stored off chain
+  string uri = 4;
+
+  // uri_hash is a hash of the document pointed by uri
+  string uriHash = 5;
+
+  // data is an app specific data of the NFT. Optional
+  google.protobuf.Any data = 6;
+}
+
+message MsgUpdateNFTResponse {
 }
 
 // this line is used by starport scaffolding # proto/tx/message

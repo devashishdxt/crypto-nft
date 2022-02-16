@@ -15,6 +15,9 @@ message ClassMetadata {
     // burnRestricted specifies whether NFT classification restricts burning NFTs by others
     bool burnRestricted = 3;
 
+    // updateRestricted specifies whether NFT classification restricts updating NFTs by others
+    bool updateRestricted = 4;
+
     // data is the app specific metadata of the NFT class. Optional
-    google.protobuf.Any data = 4;
+    google.protobuf.Any data = 5;
 }

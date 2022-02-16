@@ -10,18 +10,19 @@ const TypeMsgNewClass = "new_class"
 
 var _ sdk.Msg = &MsgNewClass{}
 
-func NewMsgNewClass(creator string, id string, name string, symbol string, description string, uri string, uriHash string, mintRestricted bool, burnRestricted bool, data *codectypes.Any) *MsgNewClass {
+func NewMsgNewClass(creator string, id string, name string, symbol string, description string, uri string, uriHash string, mintRestricted bool, burnRestricted bool, updateRestricted bool, data *codectypes.Any) *MsgNewClass {
 	return &MsgNewClass{
-		Creator:        creator,
-		Id:             id,
-		Name:           name,
-		Symbol:         symbol,
-		Description:    description,
-		Uri:            uri,
-		UriHash:        uriHash,
-		MintRestricted: mintRestricted,
-		BurnRestricted: burnRestricted,
-		Data:           data,
+		Creator:          creator,
+		Id:               id,
+		Name:             name,
+		Symbol:           symbol,
+		Description:      description,
+		Uri:              uri,
+		UriHash:          uriHash,
+		MintRestricted:   mintRestricted,
+		BurnRestricted:   burnRestricted,
+		UpdateRestricted: updateRestricted,
+		Data:             data,
 	}
 }
 

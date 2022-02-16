@@ -76,3 +76,44 @@ func (k Keeper) CanBurn(ctx sdk.Context, creator sdk.AccAddress, classId string)
 
 	return nil
 }
+
+// Update defines a method for updating an existing nft
+func (k Keeper) Update(ctx sdk.Context, creator sdk.AccAddress, classId string, nftId string, uri string, uriHash string, data *codectypes.Any) error {
+	owner := k.nftKeeper.GetOwner(ctx, classId, nftId)
+	if !owner.Equals(creator) {
+		return sdkerrors.Wrapf(sdkerrors.ErrUnauthorized, "%s is not the owner of nft %s", creator, nftId)
+	}
+
+	if err := k.CanUpdate(ctx, creator, classId); err != nil {
+		return err
+	}
+
+	nft := nft.NFT{
+		ClassId: classId,
+		Id:      nftId,
+		Uri:     uri,
+		UriHash: uriHash,
+		Data:    data,
+	}
+
+	return k.nftKeeper.Update(ctx, nft)
+}
+
+// CanUpdate returns error when the creator can't update an nft of given class
+func (k Keeper) CanUpdate(ctx sdk.Context, creator sdk.AccAddress, classId string) error {
+	class, found := k.nftKeeper.GetClass(ctx, classId)
+	if !found {
+		return sdkerrors.Wrap(nft.ErrClassNotExists, classId)
+	}
+
+	var classMetadata types.ClassMetadata
+	if err := k.cdc.Unmarshal(class.Data.GetValue(), &classMetadata); err != nil {
+		return err
+	}
+
+	if classMetadata.UpdateRestricted && classMetadata.Creator != creator.String() {
+		return sdkerrors.Wrapf(sdkerrors.ErrUnauthorized, "%s is not allowed to update NFT of class %s", creator, classId)
+	}
+
+	return nil
+}
