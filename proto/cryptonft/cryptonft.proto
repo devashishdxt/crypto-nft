@@ -1,0 +1,14 @@
+syntax = "proto3";
+package devashishdxt.cryptonft.cryptonft;
+
+import "google/protobuf/any.proto";
+
+option go_package = "github.com/devashishdxt/crypto-nft/x/cryptonft/types";
+
+message ClassMetadata {
+    // creator defines creator of NFT classification
+    string creator = 1;
+
+    // data is the app specific metadata of the NFT class. Optional
+    google.protobuf.Any data = 2;
+}
