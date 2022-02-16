@@ -13,7 +13,8 @@ func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgMintNFT{}, "cryptonft/MintNFT", nil)
 	cdc.RegisterConcrete(&MsgBurnNFT{}, "cryptonft/BurnNFT", nil)
 	cdc.RegisterConcrete(&MsgUpdateNFT{}, "cryptonft/UpdateNFT", nil)
-	// this line is used by starport scaffolding # 2
+	cdc.RegisterConcrete(&MsgUpdateClass{}, "cryptonft/UpdateClass", nil)
+// this line is used by starport scaffolding # 2
 }
 
 func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
@@ -29,7 +30,10 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgUpdateNFT{},
 	)
-	// this line is used by starport scaffolding # 3
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+	&MsgUpdateClass{},
+)
+// this line is used by starport scaffolding # 3
 
 	msgservice.RegisterMsgServiceDesc(registry, &_Msg_serviceDesc)
 }
