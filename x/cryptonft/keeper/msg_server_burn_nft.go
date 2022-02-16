@@ -5,10 +5,11 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	"github.com/cosmos/cosmos-sdk/x/nft"
 	"github.com/devashishdxt/crypto-nft/x/cryptonft/types"
 )
 
-func (k msgServer) NewClass(goCtx context.Context, msg *types.MsgNewClass) (*types.MsgNewClassResponse, error) {
+func (k msgServer) BurnNFT(goCtx context.Context, msg *types.MsgBurnNFT) (*types.MsgBurnNFTResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
@@ -16,9 +17,15 @@ func (k msgServer) NewClass(goCtx context.Context, msg *types.MsgNewClass) (*typ
 		return nil, sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
 
-	if err := k.SaveClass(ctx, creator, msg.Id, msg.Name, msg.Symbol, msg.Description, msg.Uri, msg.UriHash, msg.MintRestricted, msg.BurnRestricted, msg.Data); err != nil {
+	if err := k.Burn(ctx, creator, msg.ClassId, msg.NftId); err != nil {
 		return nil, err
 	}
 
-	return &types.MsgNewClassResponse{}, nil
+	ctx.EventManager().EmitTypedEvent(&nft.EventBurn{
+		ClassId: msg.ClassId,
+		Id:      msg.NftId,
+		Owner:   msg.Creator,
+	})
+
+	return &types.MsgBurnNFTResponse{}, nil
 }

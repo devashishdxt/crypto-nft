@@ -8,10 +8,11 @@ import (
 )
 
 // SaveClass defines a method for creating a new NFT classification
-func (k Keeper) SaveClass(ctx sdk.Context, creator sdk.AccAddress, id string, name string, symbol string, description string, uri string, uriHash string, mintRestricted bool, data *codectypes.Any) error {
+func (k Keeper) SaveClass(ctx sdk.Context, creator sdk.AccAddress, id string, name string, symbol string, description string, uri string, uriHash string, mintRestricted bool, burnRestricted bool, data *codectypes.Any) error {
 	metadata := &types.ClassMetadata{
 		Creator:        creator.String(),
 		MintRestricted: mintRestricted,
+		BurnRestricted: burnRestricted,
 		Data:           data,
 	}
 

@@ -9,9 +9,12 @@ message ClassMetadata {
     // creator defines creator of NFT classification
     string creator = 1;
 
-    // mintRestricted specifies whether NFT classification is restricts minting NFTs by others
+    // mintRestricted specifies whether NFT classification restricts minting NFTs by others
     bool mintRestricted = 2;
 
+    // burnRestricted specifies whether NFT classification restricts burning NFTs by others
+    bool burnRestricted = 3;
+
     // data is the app specific metadata of the NFT class. Optional
-    google.protobuf.Any data = 3;
+    google.protobuf.Any data = 4;
 }

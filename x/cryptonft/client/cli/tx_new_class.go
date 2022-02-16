@@ -14,7 +14,7 @@ var _ = strconv.Itoa(0)
 
 func CmdNewClass() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "new-class [id] [name] [symbol] [description] [uri] [uri-hash] [mint-restricted]",
+		Use:   "new-class [id] [name] [symbol] [description] [uri] [uri-hash] [mint-restricted] [burn-restricted]",
 		Short: "Broadcast message new-class",
 		Args:  cobra.ExactArgs(6),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
@@ -25,6 +25,7 @@ func CmdNewClass() *cobra.Command {
 			argUri := args[4]
 			argUriHash := args[5]
 			argMintRestricted, err := strconv.ParseBool(args[6])
+			argBurnRestricted, err := strconv.ParseBool(args[7])
 
 			if err != nil {
 				return err
@@ -44,6 +45,7 @@ func CmdNewClass() *cobra.Command {
 				argUri,
 				argUriHash,
 				argMintRestricted,
+				argBurnRestricted,
 				nil,
 			)
 			if err := msg.ValidateBasic(); err != nil {

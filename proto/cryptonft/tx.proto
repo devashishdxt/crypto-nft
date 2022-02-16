@@ -13,6 +13,9 @@ service Msg {
 
     // MintNFT mints a new NFT.
     rpc MintNFT(MsgMintNFT) returns (MsgMintNFTResponse);
+
+    // BurnNFT burns an existing NFT.
+    rpc BurnNFT(MsgBurnNFT) returns (MsgBurnNFTResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -41,8 +44,11 @@ message MsgNewClass {
   // mintRestricted specifies whether NFT classification is restricts minting NFTs by others
   bool mintRestricted = 8;
 
+  // burnRestricted specifies whether NFT classification restricts burning NFTs by others
+  bool burnRestricted = 9;
+
   // data is the app specific metadata of the NFT class. Optional
-  google.protobuf.Any data = 9;
+  google.protobuf.Any data = 10;
 }
 
 message MsgNewClassResponse {
@@ -72,6 +78,15 @@ message MsgMintNFT {
 }
 
 message MsgMintNFTResponse {
+}
+
+message MsgBurnNFT {
+  string creator = 1;
+  string classId = 2;
+  string nftId = 3;
+}
+
+message MsgBurnNFTResponse {
 }
 
 // this line is used by starport scaffolding # proto/tx/message
