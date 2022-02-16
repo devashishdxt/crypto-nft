@@ -5,6 +5,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	"github.com/cosmos/cosmos-sdk/x/nft"
 	"github.com/devashishdxt/crypto-nft/x/cryptonft/types"
 )
 
@@ -24,6 +25,12 @@ func (k msgServer) MintNFT(goCtx context.Context, msg *types.MsgMintNFT) (*types
 	if err := k.Mint(ctx, creator, msg.ClassId, msg.Id, msg.Uri, msg.UriHash, receiver, msg.Data); err != nil {
 		return nil, err
 	}
+
+	ctx.EventManager().EmitTypedEvent(&nft.EventMint{
+		ClassId: msg.ClassId,
+		Id:      msg.Id,
+		Owner:   msg.Receiver,
+	})
 
 	return &types.MsgMintNFTResponse{}, nil
 }
