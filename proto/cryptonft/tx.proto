@@ -8,7 +8,11 @@ option go_package = "github.com/devashishdxt/crypto-nft/x/cryptonft/types";
 
 // Msg defines the Msg service.
 service Msg {
-      rpc NewClass(MsgNewClass) returns (MsgNewClassResponse);
+    // NewClass creates a new NFT classification.
+    rpc NewClass(MsgNewClass) returns (MsgNewClassResponse);
+
+    // MintNFT mints a new NFT.
+    rpc MintNFT(MsgMintNFT) returns (MsgMintNFTResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -34,11 +38,40 @@ message MsgNewClass {
   // uri_hash is a hash of the document pointed by uri. Optional
   string uriHash = 7;
 
+  // mintRestricted specifies whether NFT classification is restricts minting NFTs by others
+  bool mintRestricted = 8;
+
   // data is the app specific metadata of the NFT class. Optional
-  google.protobuf.Any data = 8;
+  google.protobuf.Any data = 9;
 }
 
 message MsgNewClassResponse {
+}
+
+message MsgMintNFT {
+  // creator defines creator of NFT
+  string creator = 1;
+
+  // class_id associated with the NFT, similar to the contract address of ERC721
+  string classId = 2;
+
+  // id is a unique identifier of the NFT
+  string id = 3;
+
+  // uri for the NFT metadata stored off chain
+  string uri = 4;
+
+  // uri_hash is a hash of the document pointed by uri
+  string uriHash = 5;
+
+  // receiver is the address of the receiver of the NFT
+  string receiver = 6;
+
+  // data is an app specific data of the NFT. Optional
+  google.protobuf.Any data = 8;
+}
+
+message MsgMintNFTResponse {
 }
 
 // this line is used by starport scaffolding # proto/tx/message

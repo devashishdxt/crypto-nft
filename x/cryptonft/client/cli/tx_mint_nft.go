@@ -12,38 +12,30 @@ import (
 
 var _ = strconv.Itoa(0)
 
-func CmdNewClass() *cobra.Command {
+func CmdMintNft() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "new-class [id] [name] [symbol] [description] [uri] [uri-hash] [mint-restricted]",
-		Short: "Broadcast message new-class",
-		Args:  cobra.ExactArgs(6),
+		Use:   "mint-nft [class-id] [id] [uri] [uri-hash] [receiver]",
+		Short: "Broadcast message mint-nft",
+		Args:  cobra.ExactArgs(4),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
-			argId := args[0]
-			argName := args[1]
-			argSymbol := args[2]
-			argDescription := args[3]
-			argUri := args[4]
-			argUriHash := args[5]
-			argMintRestricted, err := strconv.ParseBool(args[6])
-
-			if err != nil {
-				return err
-			}
+			argClassId := args[0]
+			argId := args[1]
+			argUri := args[2]
+			argUriHash := args[3]
+			argReceiver := args[4]
 
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
 				return err
 			}
 
-			msg := types.NewMsgNewClass(
+			msg := types.NewMsgMintNFT(
 				clientCtx.GetFromAddress().String(),
+				argClassId,
 				argId,
-				argName,
-				argSymbol,
-				argDescription,
 				argUri,
 				argUriHash,
-				argMintRestricted,
+				argReceiver,
 				nil,
 			)
 			if err := msg.ValidateBasic(); err != nil {

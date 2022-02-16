@@ -43,8 +43,10 @@ type MsgNewClass struct {
 	Uri string `protobuf:"bytes,6,opt,name=uri,proto3" json:"uri,omitempty"`
 	// uri_hash is a hash of the document pointed by uri. Optional
 	UriHash string `protobuf:"bytes,7,opt,name=uriHash,proto3" json:"uriHash,omitempty"`
+	// mintRestricted specifies whether NFT classification is restricts minting NFTs by others
+	MintRestricted bool `protobuf:"varint,8,opt,name=mintRestricted,proto3" json:"mintRestricted,omitempty"`
 	// data is the app specific metadata of the NFT class. Optional
-	Data *types.Any `protobuf:"bytes,8,opt,name=data,proto3" json:"data,omitempty"`
+	Data *types.Any `protobuf:"bytes,9,opt,name=data,proto3" json:"data,omitempty"`
 }
 
 func (m *MsgNewClass) Reset()         { *m = MsgNewClass{} }
@@ -129,6 +131,13 @@ func (m *MsgNewClass) GetUriHash() string {
 	return ""
 }
 
+func (m *MsgNewClass) GetMintRestricted() bool {
+	if m != nil {
+		return m.MintRestricted
+	}
+	return false
+}
+
 func (m *MsgNewClass) GetData() *types.Any {
 	if m != nil {
 		return m.Data
@@ -172,36 +181,180 @@ func (m *MsgNewClassResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgNewClassResponse proto.InternalMessageInfo
 
+type MsgMintNFT struct {
+	// creator defines creator of NFT
+	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	// class_id associated with the NFT, similar to the contract address of ERC721
+	ClassId string `protobuf:"bytes,2,opt,name=classId,proto3" json:"classId,omitempty"`
+	// id is a unique identifier of the NFT
+	Id string `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
+	// uri for the NFT metadata stored off chain
+	Uri string `protobuf:"bytes,4,opt,name=uri,proto3" json:"uri,omitempty"`
+	// uri_hash is a hash of the document pointed by uri
+	UriHash string `protobuf:"bytes,5,opt,name=uriHash,proto3" json:"uriHash,omitempty"`
+	// receiver is the address of the receiver of the NFT
+	Receiver string `protobuf:"bytes,6,opt,name=receiver,proto3" json:"receiver,omitempty"`
+	// data is an app specific data of the NFT. Optional
+	Data *types.Any `protobuf:"bytes,8,opt,name=data,proto3" json:"data,omitempty"`
+}
+
+func (m *MsgMintNFT) Reset()         { *m = MsgMintNFT{} }
+func (m *MsgMintNFT) String() string { return proto.CompactTextString(m) }
+func (*MsgMintNFT) ProtoMessage()    {}
+func (*MsgMintNFT) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f7f3988a15c0fee9, []int{2}
+}
+func (m *MsgMintNFT) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgMintNFT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgMintNFT.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgMintNFT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgMintNFT.Merge(m, src)
+}
+func (m *MsgMintNFT) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgMintNFT) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgMintNFT.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgMintNFT proto.InternalMessageInfo
+
+func (m *MsgMintNFT) GetCreator() string {
+	if m != nil {
+		return m.Creator
+	}
+	return ""
+}
+
+func (m *MsgMintNFT) GetClassId() string {
+	if m != nil {
+		return m.ClassId
+	}
+	return ""
+}
+
+func (m *MsgMintNFT) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func (m *MsgMintNFT) GetUri() string {
+	if m != nil {
+		return m.Uri
+	}
+	return ""
+}
+
+func (m *MsgMintNFT) GetUriHash() string {
+	if m != nil {
+		return m.UriHash
+	}
+	return ""
+}
+
+func (m *MsgMintNFT) GetReceiver() string {
+	if m != nil {
+		return m.Receiver
+	}
+	return ""
+}
+
+func (m *MsgMintNFT) GetData() *types.Any {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
+type MsgMintNFTResponse struct {
+}
+
+func (m *MsgMintNFTResponse) Reset()         { *m = MsgMintNFTResponse{} }
+func (m *MsgMintNFTResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgMintNFTResponse) ProtoMessage()    {}
+func (*MsgMintNFTResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f7f3988a15c0fee9, []int{3}
+}
+func (m *MsgMintNFTResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgMintNFTResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgMintNFTResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgMintNFTResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgMintNFTResponse.Merge(m, src)
+}
+func (m *MsgMintNFTResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgMintNFTResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgMintNFTResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgMintNFTResponse proto.InternalMessageInfo
+
 func init() {
 	proto.RegisterType((*MsgNewClass)(nil), "devashishdxt.cryptonft.cryptonft.MsgNewClass")
 	proto.RegisterType((*MsgNewClassResponse)(nil), "devashishdxt.cryptonft.cryptonft.MsgNewClassResponse")
+	proto.RegisterType((*MsgMintNFT)(nil), "devashishdxt.cryptonft.cryptonft.MsgMintNFT")
+	proto.RegisterType((*MsgMintNFTResponse)(nil), "devashishdxt.cryptonft.cryptonft.MsgMintNFTResponse")
 }
 
 func init() { proto.RegisterFile("cryptonft/tx.proto", fileDescriptor_f7f3988a15c0fee9) }
 
 var fileDescriptor_f7f3988a15c0fee9 = []byte{
-	// 331 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x51, 0xbd, 0x6e, 0xf2, 0x30,
-	0x14, 0xc5, 0xc0, 0x07, 0x7c, 0x46, 0xaa, 0x2a, 0xf7, 0x47, 0x2e, 0x43, 0x14, 0x31, 0xb1, 0xe0,
-	0x48, 0xb4, 0x7d, 0x80, 0xb6, 0x4b, 0x17, 0x18, 0x18, 0xbb, 0x39, 0x89, 0x49, 0x2c, 0x41, 0x6c,
-	0xf9, 0x3a, 0x85, 0xbc, 0x45, 0x1f, 0xab, 0x23, 0x63, 0xa5, 0x2e, 0x15, 0xbc, 0x48, 0x85, 0x43,
-	0x68, 0xb6, 0xaa, 0xdb, 0x39, 0xe7, 0x9e, 0x9c, 0xdc, 0xe3, 0x8b, 0x49, 0x64, 0x0a, 0x6d, 0x55,
-	0xb6, 0xb0, 0x81, 0xdd, 0x30, 0x6d, 0x94, 0x55, 0xc4, 0x8f, 0xc5, 0x2b, 0x87, 0x54, 0x42, 0x1a,
-	0x6f, 0x2c, 0x3b, 0x19, 0x7e, 0xd0, 0xe0, 0x26, 0x51, 0x2a, 0x59, 0x8a, 0xc0, 0xf9, 0xc3, 0x7c,
-	0x11, 0xf0, 0xac, 0x28, 0x3f, 0x1e, 0x7e, 0x22, 0xdc, 0x9f, 0x42, 0x32, 0x13, 0xeb, 0xa7, 0x25,
-	0x07, 0x20, 0x14, 0x77, 0x23, 0x23, 0xb8, 0x55, 0x86, 0x22, 0x1f, 0x8d, 0xfe, 0xcf, 0x2b, 0x4a,
-	0xce, 0x70, 0x53, 0xc6, 0xb4, 0xe9, 0xc4, 0xa6, 0x8c, 0x09, 0xc1, 0xed, 0x8c, 0xaf, 0x04, 0x6d,
-	0x39, 0xc5, 0x61, 0x72, 0x8d, 0x3b, 0x50, 0xac, 0x42, 0xb5, 0xa4, 0x6d, 0xa7, 0x1e, 0x19, 0xf1,
-	0x71, 0x3f, 0x16, 0x10, 0x19, 0xa9, 0xad, 0x54, 0x19, 0xfd, 0xe7, 0x86, 0x75, 0x89, 0x9c, 0xe3,
-	0x56, 0x6e, 0x24, 0xed, 0xb8, 0xc9, 0x01, 0x1e, 0x36, 0xc9, 0x8d, 0x7c, 0xe6, 0x90, 0xd2, 0x6e,
-	0xb9, 0xc9, 0x91, 0x92, 0x11, 0x6e, 0xc7, 0xdc, 0x72, 0xda, 0xf3, 0xd1, 0xa8, 0x3f, 0xb9, 0x64,
-	0x65, 0x3b, 0x56, 0xb5, 0x63, 0x0f, 0x59, 0x31, 0x77, 0x8e, 0xe1, 0x15, 0xbe, 0xa8, 0x95, 0x9b,
-	0x0b, 0xd0, 0x2a, 0x03, 0x31, 0x59, 0xe3, 0xd6, 0x14, 0x12, 0xa2, 0x71, 0xef, 0xd4, 0x7b, 0xcc,
-	0x7e, 0x7b, 0x45, 0x56, 0x4b, 0x1a, 0xdc, 0xff, 0xc9, 0x5e, 0xfd, 0xf8, 0x71, 0xf6, 0xbe, 0xf3,
-	0xd0, 0x76, 0xe7, 0xa1, 0xaf, 0x9d, 0x87, 0xde, 0xf6, 0x5e, 0x63, 0xbb, 0xf7, 0x1a, 0x1f, 0x7b,
-	0xaf, 0xf1, 0x72, 0x97, 0x48, 0x9b, 0xe6, 0x21, 0x8b, 0xd4, 0x2a, 0xa8, 0x47, 0x07, 0x65, 0xe0,
-	0xf8, 0x70, 0xf1, 0x4d, 0x50, 0xbb, 0x7e, 0xa1, 0x05, 0x84, 0x1d, 0xd7, 0xf9, 0xf6, 0x3b, 0x00,
-	0x00, 0xff, 0xff, 0xf5, 0xba, 0x27, 0xc7, 0x17, 0x02, 0x00, 0x00,
+	// 441 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x93, 0xb1, 0x8e, 0xd3, 0x30,
+	0x18, 0xc7, 0xeb, 0xb6, 0xd7, 0xe6, 0xbe, 0x4a, 0x27, 0x64, 0x0e, 0x64, 0x3a, 0x44, 0x51, 0x07,
+	0xd4, 0x81, 0x4b, 0xa4, 0xe3, 0x78, 0x00, 0x40, 0x42, 0x30, 0xb4, 0x43, 0xc4, 0xc4, 0xe6, 0x26,
+	0xbe, 0xd4, 0x52, 0x63, 0x47, 0xb6, 0x7b, 0x34, 0x33, 0x2f, 0xc0, 0x33, 0x31, 0x31, 0xde, 0xc8,
+	0x88, 0x5a, 0x89, 0xe7, 0x40, 0x71, 0xe2, 0x5c, 0x40, 0x88, 0xbb, 0x6e, 0xfe, 0xfe, 0xdf, 0xdf,
+	0x9f, 0xfd, 0xff, 0x25, 0x06, 0x9c, 0xa8, 0xb2, 0x30, 0x52, 0x5c, 0x9b, 0xc8, 0xec, 0xc2, 0x42,
+	0x49, 0x23, 0x71, 0x90, 0xb2, 0x1b, 0xaa, 0xd7, 0x5c, 0xaf, 0xd3, 0x9d, 0x09, 0x5b, 0xc3, 0xdd,
+	0x6a, 0xfa, 0x2c, 0x93, 0x32, 0xdb, 0xb0, 0xc8, 0xfa, 0x57, 0xdb, 0xeb, 0x88, 0x8a, 0xb2, 0xde,
+	0x3c, 0xfb, 0xd2, 0x87, 0xc9, 0x42, 0x67, 0x4b, 0xf6, 0xf9, 0xed, 0x86, 0x6a, 0x8d, 0x09, 0x8c,
+	0x13, 0xc5, 0xa8, 0x91, 0x8a, 0xa0, 0x00, 0xcd, 0x4f, 0x63, 0x57, 0xe2, 0x33, 0xe8, 0xf3, 0x94,
+	0xf4, 0xad, 0xd8, 0xe7, 0x29, 0xc6, 0x30, 0x14, 0x34, 0x67, 0x64, 0x60, 0x15, 0xbb, 0xc6, 0x4f,
+	0x61, 0xa4, 0xcb, 0x7c, 0x25, 0x37, 0x64, 0x68, 0xd5, 0xa6, 0xc2, 0x01, 0x4c, 0x52, 0xa6, 0x13,
+	0xc5, 0x0b, 0xc3, 0xa5, 0x20, 0x27, 0xb6, 0xd9, 0x95, 0xf0, 0x23, 0x18, 0x6c, 0x15, 0x27, 0x23,
+	0xdb, 0xa9, 0x96, 0xd5, 0x4d, 0xb6, 0x8a, 0xbf, 0xa7, 0x7a, 0x4d, 0xc6, 0xf5, 0x4d, 0x9a, 0x12,
+	0x3f, 0x87, 0xb3, 0x9c, 0x0b, 0x13, 0x33, 0x6d, 0x14, 0x4f, 0x0c, 0x4b, 0x89, 0x17, 0xa0, 0xb9,
+	0x17, 0xff, 0xa5, 0xe2, 0x39, 0x0c, 0x53, 0x6a, 0x28, 0x39, 0x0d, 0xd0, 0x7c, 0x72, 0x79, 0x1e,
+	0xd6, 0x14, 0x42, 0x47, 0x21, 0x7c, 0x2d, 0xca, 0xd8, 0x3a, 0x66, 0x4f, 0xe0, 0x71, 0x07, 0x42,
+	0xcc, 0x74, 0x21, 0x85, 0x66, 0xb3, 0x6f, 0x08, 0x60, 0xa1, 0xb3, 0x05, 0x17, 0x66, 0xf9, 0xee,
+	0xe3, 0x7f, 0xd8, 0x54, 0x9d, 0x6a, 0xe7, 0x07, 0x07, 0xc8, 0x95, 0x0d, 0xb5, 0x41, 0x4b, 0xad,
+	0xc9, 0x39, 0xfc, 0x67, 0xce, 0x93, 0x3f, 0x73, 0x4e, 0xc1, 0x53, 0x2c, 0x61, 0xfc, 0x86, 0xa9,
+	0x06, 0x4c, 0x5b, 0xb7, 0xd9, 0xbc, 0x7b, 0xb3, 0x9d, 0x03, 0xbe, 0xcb, 0xe0, 0xa2, 0x5d, 0xfe,
+	0x42, 0x30, 0x58, 0xe8, 0x0c, 0x17, 0xe0, 0xb5, 0xdf, 0xfe, 0x22, 0xbc, 0xef, 0x4f, 0x0a, 0x3b,
+	0x94, 0xa6, 0xaf, 0x8e, 0xb2, 0xbb, 0x93, 0x71, 0x0e, 0x63, 0x07, 0xf4, 0xc5, 0x83, 0x26, 0x34,
+	0xee, 0xe9, 0xd5, 0x31, 0x6e, 0x77, 0xdc, 0x9b, 0xe5, 0xf7, 0xbd, 0x8f, 0x6e, 0xf7, 0x3e, 0xfa,
+	0xb9, 0xf7, 0xd1, 0xd7, 0x83, 0xdf, 0xbb, 0x3d, 0xf8, 0xbd, 0x1f, 0x07, 0xbf, 0xf7, 0xe9, 0x2a,
+	0xe3, 0x66, 0xbd, 0x5d, 0x85, 0x89, 0xcc, 0xa3, 0xee, 0xe4, 0xa8, 0x9e, 0x77, 0x51, 0x3d, 0xb2,
+	0x5d, 0xd4, 0x79, 0x70, 0x65, 0xc1, 0xf4, 0x6a, 0x64, 0x11, 0xbf, 0xfc, 0x1d, 0x00, 0x00, 0xff,
+	0xff, 0x7d, 0x09, 0x75, 0x4e, 0x8a, 0x03, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -216,7 +369,10 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type MsgClient interface {
+	// NewClass creates a new NFT classification.
 	NewClass(ctx context.Context, in *MsgNewClass, opts ...grpc.CallOption) (*MsgNewClassResponse, error)
+	// MintNFT mints a new NFT.
+	MintNFT(ctx context.Context, in *MsgMintNFT, opts ...grpc.CallOption) (*MsgMintNFTResponse, error)
 }
 
 type msgClient struct {
@@ -236,9 +392,21 @@ func (c *msgClient) NewClass(ctx context.Context, in *MsgNewClass, opts ...grpc.
 	return out, nil
 }
 
+func (c *msgClient) MintNFT(ctx context.Context, in *MsgMintNFT, opts ...grpc.CallOption) (*MsgMintNFTResponse, error) {
+	out := new(MsgMintNFTResponse)
+	err := c.cc.Invoke(ctx, "/devashishdxt.cryptonft.cryptonft.Msg/MintNFT", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 type MsgServer interface {
+	// NewClass creates a new NFT classification.
 	NewClass(context.Context, *MsgNewClass) (*MsgNewClassResponse, error)
+	// MintNFT mints a new NFT.
+	MintNFT(context.Context, *MsgMintNFT) (*MsgMintNFTResponse, error)
 }
 
 // UnimplementedMsgServer can be embedded to have forward compatible implementations.
@@ -247,6 +415,9 @@ type UnimplementedMsgServer struct {
 
 func (*UnimplementedMsgServer) NewClass(ctx context.Context, req *MsgNewClass) (*MsgNewClassResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NewClass not implemented")
+}
+func (*UnimplementedMsgServer) MintNFT(ctx context.Context, req *MsgMintNFT) (*MsgMintNFTResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MintNFT not implemented")
 }
 
 func RegisterMsgServer(s grpc1.Server, srv MsgServer) {
@@ -271,6 +442,24 @@ func _Msg_NewClass_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_MintNFT_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgMintNFT)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).MintNFT(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/devashishdxt.cryptonft.cryptonft.Msg/MintNFT",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).MintNFT(ctx, req.(*MsgMintNFT))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Msg_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "devashishdxt.cryptonft.cryptonft.Msg",
 	HandlerType: (*MsgServer)(nil),
@@ -278,6 +467,10 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "NewClass",
 			Handler:    _Msg_NewClass_Handler,
+		},
+		{
+			MethodName: "MintNFT",
+			Handler:    _Msg_MintNFT_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -314,7 +507,17 @@ func (m *MsgNewClass) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 			i = encodeVarintTx(dAtA, i, uint64(size))
 		}
 		i--
-		dAtA[i] = 0x42
+		dAtA[i] = 0x4a
+	}
+	if m.MintRestricted {
+		i--
+		if m.MintRestricted {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x40
 	}
 	if len(m.UriHash) > 0 {
 		i -= len(m.UriHash)
@@ -391,6 +594,106 @@ func (m *MsgNewClassResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *MsgMintNFT) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgMintNFT) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgMintNFT) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Data != nil {
+		{
+			size, err := m.Data.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTx(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x42
+	}
+	if len(m.Receiver) > 0 {
+		i -= len(m.Receiver)
+		copy(dAtA[i:], m.Receiver)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Receiver)))
+		i--
+		dAtA[i] = 0x32
+	}
+	if len(m.UriHash) > 0 {
+		i -= len(m.UriHash)
+		copy(dAtA[i:], m.UriHash)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.UriHash)))
+		i--
+		dAtA[i] = 0x2a
+	}
+	if len(m.Uri) > 0 {
+		i -= len(m.Uri)
+		copy(dAtA[i:], m.Uri)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Uri)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.Id) > 0 {
+		i -= len(m.Id)
+		copy(dAtA[i:], m.Id)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Id)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.ClassId) > 0 {
+		i -= len(m.ClassId)
+		copy(dAtA[i:], m.ClassId)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.ClassId)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Creator) > 0 {
+		i -= len(m.Creator)
+		copy(dAtA[i:], m.Creator)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgMintNFTResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgMintNFTResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgMintNFTResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintTx(dAtA []byte, offset int, v uint64) int {
 	offset -= sovTx(v)
 	base := offset
@@ -436,6 +739,9 @@ func (m *MsgNewClass) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovTx(uint64(l))
 	}
+	if m.MintRestricted {
+		n += 2
+	}
 	if m.Data != nil {
 		l = m.Data.Size()
 		n += 1 + l + sovTx(uint64(l))
@@ -444,6 +750,52 @@ func (m *MsgNewClass) Size() (n int) {
 }
 
 func (m *MsgNewClassResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	return n
+}
+
+func (m *MsgMintNFT) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Creator)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.ClassId)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Id)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Uri)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.UriHash)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Receiver)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	if m.Data != nil {
+		l = m.Data.Size()
+		n += 1 + l + sovTx(uint64(l))
+	}
+	return n
+}
+
+func (m *MsgMintNFTResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -712,6 +1064,26 @@ func (m *MsgNewClass) Unmarshal(dAtA []byte) error {
 			m.UriHash = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 8:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field MintRestricted", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.MintRestricted = bool(v != 0)
+		case 9:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Data", wireType)
 			}
@@ -795,6 +1167,334 @@ func (m *MsgNewClassResponse) Unmarshal(dAtA []byte) error {
 		}
 		if fieldNum <= 0 {
 			return fmt.Errorf("proto: MsgNewClassResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgMintNFT) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgMintNFT: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgMintNFT: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Creator = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ClassId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ClassId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Id = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Uri", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Uri = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field UriHash", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.UriHash = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 6:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Receiver", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Receiver = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 8:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Data", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Data == nil {
+				m.Data = &types.Any{}
+			}
+			if err := m.Data.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgMintNFTResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgMintNFTResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgMintNFTResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:
