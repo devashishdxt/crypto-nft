@@ -1,0 +1,14 @@
+syntax = "proto3";
+package devashishdxt.cryptonft.compatnft;
+
+import "gogoproto/gogo.proto";
+import "compatnft/params.proto";
+// this line is used by starport scaffolding # genesis/proto/import
+
+option go_package = "github.com/devashishdxt/crypto-nft/x/compatnft/types";
+
+// GenesisState defines the compatnft module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+  // this line is used by starport scaffolding # genesis/proto/state
+}
