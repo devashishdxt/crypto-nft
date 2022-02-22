@@ -30,7 +30,12 @@ func GetTxCmd() *cobra.Command {
 		RunE:                       client.ValidateCmd,
 	}
 
+	cmd.AddCommand(CmdIssueDenom())
+	cmd.AddCommand(CmdMintNft())
+	cmd.AddCommand(CmdEditNFT())
+	cmd.AddCommand(CmdTransferNFT())
+	cmd.AddCommand(CmdBurnNFT())
 	// this line is used by starport scaffolding # 1
 
-	return cmd 
+	return cmd
 }

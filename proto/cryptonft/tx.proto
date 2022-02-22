@@ -19,7 +19,9 @@ service Msg {
     
     // UpdateNFT updates an existing NFT.
     rpc UpdateNFT(MsgUpdateNFT) returns (MsgUpdateNFTResponse);
-  rpc UpdateClass(MsgUpdateClass) returns (MsgUpdateClassResponse);
+
+    // UpdateClass updates an existing NFT classification.
+    rpc UpdateClass(MsgUpdateClass) returns (MsgUpdateClassResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 

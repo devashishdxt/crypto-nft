@@ -117,3 +117,17 @@ func (k Keeper) CanUpdate(ctx sdk.Context, creator sdk.AccAddress, classId strin
 
 	return nil
 }
+
+// Transfer defines a method for sending a nft from one account to another account.
+func (k Keeper) Transfer(ctx sdk.Context, creator sdk.AccAddress, classId string, nftId string, receiver sdk.AccAddress) error {
+	owner := k.nftKeeper.GetOwner(ctx, classId, nftId)
+	if !owner.Equals(creator) {
+		return sdkerrors.Wrapf(sdkerrors.ErrUnauthorized, "%s is not the owner of nft %s", creator.String(), nftId)
+	}
+
+	if err := k.nftKeeper.Transfer(ctx, classId, nftId, receiver); err != nil {
+		return err
+	}
+
+	return nil
+}

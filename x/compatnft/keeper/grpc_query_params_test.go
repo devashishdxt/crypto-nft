@@ -4,13 +4,13 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/stretchr/testify/require"
-	testkeeper 	"github.com/devashishdxt/crypto-nft/testutil/keeper"
+	testkeeper "github.com/devashishdxt/crypto-nft/testutil/keeper"
 	"github.com/devashishdxt/crypto-nft/x/compatnft/types"
+	"github.com/stretchr/testify/require"
 )
 
 func TestParamsQuery(t *testing.T) {
-	keeper, ctx := testkeeper.CompatnftKeeper(t)
+	keeper, ctx := testkeeper.CompatnftKeeper(t, nil, nil)
 	wctx := sdk.WrapSDKContext(ctx)
 	params := types.DefaultParams()
 	keeper.SetParams(ctx, params)

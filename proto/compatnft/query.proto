@@ -15,7 +15,13 @@ service Query {
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/devashishdxt/cryptonft/compatnft/params";
   }
-  // this line is used by starport scaffolding # 2
+
+  // Supply queries the total supply of a given denom or owner
+  rpc Supply(QuerySupplyRequest) returns (QuerySupplyResponse) {
+    option (google.api.http).get = "/chainmain/nft/collections/{denom_id}/supply";
+}
+
+// this line is used by starport scaffolding # 2
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -25,6 +31,17 @@ message QueryParamsRequest {}
 message QueryParamsResponse {
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
+}
+
+// QuerySupplyRequest is the request type for the Query/Supply RPC method
+message QuerySupplyRequest {
+  string denom_id = 1 [ (gogoproto.moretags) = "yaml:\"denom_id\"" ];
+  string owner = 2;
+}
+
+// QuerySupplyResponse is the response type for the Query/Supply RPC method
+message QuerySupplyResponse {
+  uint64 amount = 1;
 }
 
 // this line is used by starport scaffolding # 3

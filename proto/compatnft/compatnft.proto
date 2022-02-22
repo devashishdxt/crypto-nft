@@ -1,0 +1,12 @@
+syntax = "proto3";
+package devashishdxt.cryptonft.compatnft;
+
+option go_package = "github.com/devashishdxt/crypto-nft/x/compatnft/types";
+
+message DenomMetadata {
+    string schema = 1;
+}
+
+message NFTMetadata {
+    string data = 1;
+}

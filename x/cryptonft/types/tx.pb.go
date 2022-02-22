@@ -806,6 +806,7 @@ type MsgClient interface {
 	BurnNFT(ctx context.Context, in *MsgBurnNFT, opts ...grpc.CallOption) (*MsgBurnNFTResponse, error)
 	// UpdateNFT updates an existing NFT.
 	UpdateNFT(ctx context.Context, in *MsgUpdateNFT, opts ...grpc.CallOption) (*MsgUpdateNFTResponse, error)
+	// UpdateClass updates an existing NFT classification.
 	UpdateClass(ctx context.Context, in *MsgUpdateClass, opts ...grpc.CallOption) (*MsgUpdateClassResponse, error)
 }
 
@@ -872,6 +873,7 @@ type MsgServer interface {
 	BurnNFT(context.Context, *MsgBurnNFT) (*MsgBurnNFTResponse, error)
 	// UpdateNFT updates an existing NFT.
 	UpdateNFT(context.Context, *MsgUpdateNFT) (*MsgUpdateNFTResponse, error)
+	// UpdateClass updates an existing NFT classification.
 	UpdateClass(context.Context, *MsgUpdateClass) (*MsgUpdateClassResponse, error)
 }
 
