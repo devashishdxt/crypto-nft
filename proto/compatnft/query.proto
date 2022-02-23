@@ -5,6 +5,7 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "compatnft/params.proto";
+import "compatnft/compatnft.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "github.com/devashishdxt/crypto-nft/x/compatnft/types";
@@ -18,8 +19,13 @@ service Query {
 
   // Supply queries the total supply of a given denom or owner
   rpc Supply(QuerySupplyRequest) returns (QuerySupplyResponse) {
-    option (google.api.http).get = "/chainmain/nft/collections/{denom_id}/supply";
-}
+    option (google.api.http).get = "/devashishdxt/cryptonft/compatnft/collections/{denom_id}/supply";
+  }
+
+  // Owner queries the NFTs of the specified owner
+	rpc Owner(QueryOwnerRequest) returns (QueryOwnerResponse) {
+		option (google.api.http).get = "/devashishdxt/cryptonft/compatnft/nfts";
+	}
 
 // this line is used by starport scaffolding # 2
 }
@@ -42,6 +48,20 @@ message QuerySupplyRequest {
 // QuerySupplyResponse is the response type for the Query/Supply RPC method
 message QuerySupplyResponse {
   uint64 amount = 1;
+}
+
+// QueryOwnerRequest is the request type for the Query/Owner RPC method
+message QueryOwnerRequest {
+  string denom_id = 1 [ (gogoproto.moretags) = "yaml:\"denom_id\"" ];
+  string owner = 2 [ (gogoproto.moretags) = "yaml:\"owner\"" ];
+  // pagination defines an optional pagination for the request.
+  cosmos.base.query.v1beta1.PageRequest pagination = 3;
+}
+
+// QueryOwnerResponse is the response type for the Query/Owner RPC method
+message QueryOwnerResponse {
+  Owner owner = 1;
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 // this line is used by starport scaffolding # 3
