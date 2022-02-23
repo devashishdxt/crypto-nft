@@ -1,12 +1,12 @@
 package cli
 
 import (
-    "strconv"
-	
-	"github.com/spf13/cobra"
-    "github.com/cosmos/cosmos-sdk/client"
+	"strconv"
+
+	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/devashishdxt/crypto-nft/x/compatnft/types"
+	"github.com/spf13/cobra"
 )
 
 var _ = strconv.Itoa(0)
@@ -17,7 +17,7 @@ func CmdDenoms() *cobra.Command {
 		Short: "Query denoms",
 		Args:  cobra.ExactArgs(0),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
-			
+
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
 				return err
@@ -25,26 +25,24 @@ func CmdDenoms() *cobra.Command {
 
 			queryClient := types.NewQueryClient(clientCtx)
 
-			params := &types.QueryDenomsRequest{
-				
-            }
+			params := &types.QueryDenomsRequest{}
 
-            pageReq, err := client.ReadPageRequest(cmd.Flags())
-            if err != nil {
-                return err
-            }
-            params.Pagination = pageReq
+			pageReq, err := client.ReadPageRequest(cmd.Flags())
+			if err != nil {
+				return err
+			}
+			params.Pagination = pageReq
 
 			res, err := queryClient.Denoms(cmd.Context(), params)
-            if err != nil {
-                return err
-            }
+			if err != nil {
+				return err
+			}
 
-            return clientCtx.PrintProto(res)
+			return clientCtx.PrintProto(res)
 		},
 	}
 
 	flags.AddQueryFlagsToCmd(cmd)
 
-    return cmd
+	return cmd
 }

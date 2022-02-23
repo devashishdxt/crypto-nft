@@ -11,13 +11,14 @@ import (
 
 var _ = strconv.Itoa(0)
 
-func CmdCollection() *cobra.Command {
+func CmdNFT() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "collection [denom-id]",
-		Short: "Query collection",
-		Args:  cobra.ExactArgs(1),
+		Use:   "nft [denom-id] [token-id]",
+		Short: "Query NFT",
+		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			reqDenomId := args[0]
+			reqTokenId := args[1]
 
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
@@ -26,18 +27,13 @@ func CmdCollection() *cobra.Command {
 
 			queryClient := types.NewQueryClient(clientCtx)
 
-			params := &types.QueryCollectionRequest{
+			params := &types.QueryNFTRequest{
 
 				DenomId: reqDenomId,
+				TokenId: reqTokenId,
 			}
 
-			pageReq, err := client.ReadPageRequest(cmd.Flags())
-			if err != nil {
-				return err
-			}
-			params.Pagination = pageReq
-
-			res, err := queryClient.Collection(cmd.Context(), params)
+			res, err := queryClient.NFT(cmd.Context(), params)
 			if err != nil {
 				return err
 			}

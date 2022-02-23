@@ -9,4 +9,5 @@ import (
 // x/compatnft module sentinel errors
 var (
 	ErrDenomNotFound = sdkerrors.Register(ModuleName, 1, "denom not found")
+	ErrNftNotFound   = sdkerrors.Register(ModuleName, 2, "nft not found")
 )
