@@ -22,6 +22,6 @@ func (k Keeper) Class(goCtx context.Context, req *types.QueryClassRequest) (*typ
 	}
 
 	return &types.QueryClassResponse{
-		Class: &class,
+		Class: class,
 	}, nil
 }

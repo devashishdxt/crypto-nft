@@ -27,9 +27,14 @@ service Query {
 		option (google.api.http).get = "/devashishdxt/cryptonft/compatnft/nfts";
 	}
 
-  // Queries a list of Collection items.
+  // Collection queries the NFTs of the specified denom
 	rpc Collection(QueryCollectionRequest) returns (QueryCollectionResponse) {
 		option (google.api.http).get = "/devashishdxt/cryptonft/compatnft/collections/{denom_id}";
+	}
+
+  // Denom queries the definition of a given denom
+	rpc Denom(QueryDenomRequest) returns (QueryDenomResponse) {
+		option (google.api.http).get = "/devashishdxt/cryptonft/compatnft/denoms/{denom_id}";
 	}
 
 // this line is used by starport scaffolding # 2
@@ -80,6 +85,16 @@ message QueryCollectionRequest {
 message QueryCollectionResponse {
   Collection collection = 1;
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+// QueryDenomRequest is the request type for the Query/Denom RPC method
+message QueryDenomRequest {
+  string denom_id = 1 [ (gogoproto.moretags) = "yaml:\"denom_id\"" ];
+}
+
+// QueryDenomResponse is the response type for the Query/Denom RPC method
+message QueryDenomResponse {
+  Denom denom = 1;
 }
 
 // this line is used by starport scaffolding # 3

@@ -8,5 +8,5 @@ import (
 
 // x/compatnft module sentinel errors
 var (
-	ErrSample = sdkerrors.Register(ModuleName, 1100, "sample error")
+	ErrDenomNotFound = sdkerrors.Register(ModuleName, 1, "denom not found")
 )
