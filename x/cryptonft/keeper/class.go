@@ -88,6 +88,10 @@ func (k Keeper) GetClass(ctx sdk.Context, id string) (*types.Class, bool) {
 		return nil, false
 	}
 
+	return k.ConvertClass(&class), true
+}
+
+func (k Keeper) ConvertClass(class *nft.Class) *types.Class {
 	var classMetadata types.ClassMetadata
 	k.cdc.MustUnmarshal(class.Data.GetValue(), &classMetadata)
 
@@ -103,5 +107,5 @@ func (k Keeper) GetClass(ctx sdk.Context, id string) (*types.Class, bool) {
 		BurnRestricted:   classMetadata.BurnRestricted,
 		UpdateRestricted: classMetadata.UpdateRestricted,
 		Data:             class.Data,
-	}, true
+	}
 }

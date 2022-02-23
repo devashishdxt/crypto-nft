@@ -5,19 +5,18 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
-	"github.com/devashishdxt/crypto-nft/x/compatnft/types"
+	"github.com/devashishdxt/crypto-nft/x/cryptonft/types"
 	"github.com/spf13/cobra"
 )
 
 var _ = strconv.Itoa(0)
 
-func CmdDenom() *cobra.Command {
+func CmdClasses() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "denom [denom-id]",
-		Short: "Query denom",
-		Args:  cobra.ExactArgs(1),
+		Use:   "classes",
+		Short: "Query classes",
+		Args:  cobra.ExactArgs(0),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
-			reqDenomId := args[0]
 
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
@@ -26,12 +25,15 @@ func CmdDenom() *cobra.Command {
 
 			queryClient := types.NewQueryClient(clientCtx)
 
-			params := &types.QueryDenomRequest{
+			params := &types.QueryClassesRequest{}
 
-				DenomId: reqDenomId,
+			pageReq, err := client.ReadPageRequest(cmd.Flags())
+			if err != nil {
+				return err
 			}
+			params.Pagination = pageReq
 
-			res, err := queryClient.Denom(cmd.Context(), params)
+			res, err := queryClient.Classes(cmd.Context(), params)
 			if err != nil {
 				return err
 			}

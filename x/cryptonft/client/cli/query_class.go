@@ -11,7 +11,7 @@ import (
 
 var _ = strconv.Itoa(0)
 
-func CmdClasses() *cobra.Command {
+func CmdClass() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "class [class-id]",
 		Short: "Query class",

@@ -37,6 +37,11 @@ service Query {
 		option (google.api.http).get = "/devashishdxt/cryptonft/compatnft/denoms/{denom_id}";
 	}
 
+  // Denoms queries all the denoms
+	rpc Denoms(QueryDenomsRequest) returns (QueryDenomsResponse) {
+		option (google.api.http).get = "/devashishdxt/cryptonft/compatnft/denoms";
+	}
+
 // this line is used by starport scaffolding # 2
 }
 
@@ -95,6 +100,19 @@ message QueryDenomRequest {
 // QueryDenomResponse is the response type for the Query/Denom RPC method
 message QueryDenomResponse {
   Denom denom = 1;
+}
+
+// QueryDenomsRequest is the request type for the Query/Denoms RPC method
+message QueryDenomsRequest {
+  // pagination defines an optional pagination for the request.
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+// QueryDenomsResponse is the response type for the Query/Denoms RPC method
+message QueryDenomsResponse {
+  repeated Denom denoms = 1 [ (gogoproto.nullable) = false ];
+
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 // this line is used by starport scaffolding # 3

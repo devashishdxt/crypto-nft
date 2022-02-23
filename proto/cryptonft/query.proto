@@ -12,14 +12,19 @@ option go_package = "github.com/devashishdxt/crypto-nft/x/cryptonft/types";
 
 // Query defines the gRPC querier service.
 service Query {
-  // Parameters queries the parameters of the module.
+  // Params queries the parameters of the module.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/devashishdxt/cryptonft/cryptonft/params";
   }
 
-  // Queries a class with the given `classId`.
+  // Class queries a class with the given `classId`.
 	rpc Class(QueryClassRequest) returns (QueryClassResponse) {
 		option (google.api.http).get = "/devashishdxt/cryptonft/cryptonft/class/{classId}";
+	}
+
+  // Classes queries all the classes.
+	rpc Classes(QueryClassesRequest) returns (QueryClassesResponse) {
+		option (google.api.http).get = "/devashishdxt/cryptonft/cryptonft/classes";
 	}
 
 // this line is used by starport scaffolding # 2
@@ -43,6 +48,17 @@ message QueryClassRequest {
 message QueryClassResponse {
   // class holds the class with the given `classId`.
   Class class = 1;
+}
+
+// QueryClassesRequest is request type for the Query/Classes RPC method.
+message QueryClassesRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+// QueryClassesResponse is response type for the Query/Classes RPC method.
+message QueryClassesResponse {
+  repeated Class                         classes    = 1;
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 // this line is used by starport scaffolding # 3

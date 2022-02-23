@@ -5,6 +5,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/devashishdxt/crypto-nft/x/compatnft/types"
+	cryptonfttypes "github.com/devashishdxt/crypto-nft/x/cryptonft/types"
 )
 
 func (k Keeper) AddDenom(ctx sdk.Context, sender sdk.AccAddress, id string, name string, schema string) error {
@@ -26,6 +27,10 @@ func (k Keeper) GetDenom(ctx sdk.Context, denomId string) (*types.Denom, error) 
 		return nil, sdkerrors.Wrapf(types.ErrDenomNotFound, "not found denomId: %s", denomId)
 	}
 
+	return k.ConvertClass(class)
+}
+
+func (k Keeper) ConvertClass(class *cryptonfttypes.Class) (*types.Denom, error) {
 	var denomMetadata types.DenomMetadata
 	if err := k.cdc.Unmarshal(class.Data.GetValue(), &denomMetadata); err != nil {
 		return nil, err
