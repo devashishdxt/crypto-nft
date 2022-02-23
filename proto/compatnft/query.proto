@@ -27,6 +27,11 @@ service Query {
 		option (google.api.http).get = "/devashishdxt/cryptonft/compatnft/nfts";
 	}
 
+  // Queries a list of Collection items.
+	rpc Collection(QueryCollectionRequest) returns (QueryCollectionResponse) {
+		option (google.api.http).get = "/devashishdxt/cryptonft/compatnft/collections/{denom_id}";
+	}
+
 // this line is used by starport scaffolding # 2
 }
 
@@ -61,6 +66,19 @@ message QueryOwnerRequest {
 // QueryOwnerResponse is the response type for the Query/Owner RPC method
 message QueryOwnerResponse {
   Owner owner = 1;
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+// QueryCollectionRequest is the request type for the Query/Collection RPC method
+message QueryCollectionRequest {
+  string denom_id = 1 [ (gogoproto.moretags) = "yaml:\"denom_id\"" ];
+  // pagination defines an optional pagination for the request.
+  cosmos.base.query.v1beta1.PageRequest pagination = 2;
+}
+
+// QueryCollectionResponse is the response type for the Query/Collection RPC method
+message QueryCollectionResponse {
+  Collection collection = 1;
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 

@@ -8,6 +8,7 @@ import (
 
 func (k Keeper) Mint(ctx sdk.Context, sender sdk.AccAddress, nftId string, denomId string, name string, uri string, data string, receiver sdk.AccAddress) error {
 	nftMetadata := &types.NFTMetadata{
+		Name: name,
 		Data: data,
 	}
 
