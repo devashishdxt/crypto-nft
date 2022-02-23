@@ -81,3 +81,27 @@ func (k Keeper) PutClass(ctx sdk.Context, creator sdk.AccAddress, id string, nam
 
 	return nil
 }
+
+func (k Keeper) GetClass(ctx sdk.Context, id string) (types.Class, bool) {
+	class, found := k.NftKeeper().GetClass(ctx, id)
+	if !found {
+		return types.Class{}, false
+	}
+
+	var classMetadata types.ClassMetadata
+	k.cdc.MustUnmarshal(class.Data.GetValue(), &classMetadata)
+
+	return types.Class{
+		Creator:          classMetadata.Creator,
+		Id:               class.Id,
+		Name:             class.Name,
+		Symbol:           class.Symbol,
+		Description:      class.Description,
+		Uri:              class.Uri,
+		UriHash:          class.UriHash,
+		MintRestricted:   classMetadata.MintRestricted,
+		BurnRestricted:   classMetadata.BurnRestricted,
+		UpdateRestricted: classMetadata.UpdateRestricted,
+		Data:             class.Data,
+	}, true
+}

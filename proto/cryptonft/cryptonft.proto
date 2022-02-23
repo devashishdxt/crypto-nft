@@ -21,3 +21,38 @@ message ClassMetadata {
     // data is the app specific metadata of the NFT class. Optional
     google.protobuf.Any data = 5;
 }
+
+message Class {
+    // creator defines creator of NFT classification
+    string creator = 1;
+
+    // id defines the unique identifier of the NFT classification, similar to the contract address of ERC721
+    string id = 2;
+
+    // name defines the human-readable name of the NFT classification. Optional
+    string name = 3;
+
+    // symbol is an abbreviated name for nft classification. Optional
+    string symbol = 4;
+
+    // description is a brief description of nft classification. Optional
+    string description = 5;
+
+    // uri for the class metadata stored off chain. It can define schema for Class and NFT `Data` attributes. Optional
+    string uri = 6;
+
+    // uri_hash is a hash of the document pointed by uri. Optional
+    string uriHash = 7;
+
+    // mintRestricted specifies whether NFT classification is restricts minting NFTs by others
+    bool mintRestricted = 8;
+
+    // burnRestricted specifies whether NFT classification restricts burning NFTs by others
+    bool burnRestricted = 9;
+
+    // updateRestricted specifies whether NFT classification restricts updating NFTs by others
+    bool updateRestricted = 10;
+
+    // data is the app specific metadata of the NFT class. Optional
+    google.protobuf.Any data = 11;
+}

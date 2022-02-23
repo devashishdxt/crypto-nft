@@ -104,31 +104,173 @@ func (m *ClassMetadata) GetData() *types.Any {
 	return nil
 }
 
+type Class struct {
+	// creator defines creator of NFT classification
+	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	// id defines the unique identifier of the NFT classification, similar to the contract address of ERC721
+	Id string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
+	// name defines the human-readable name of the NFT classification. Optional
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// symbol is an abbreviated name for nft classification. Optional
+	Symbol string `protobuf:"bytes,4,opt,name=symbol,proto3" json:"symbol,omitempty"`
+	// description is a brief description of nft classification. Optional
+	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	// uri for the class metadata stored off chain. It can define schema for Class and NFT `Data` attributes. Optional
+	Uri string `protobuf:"bytes,6,opt,name=uri,proto3" json:"uri,omitempty"`
+	// uri_hash is a hash of the document pointed by uri. Optional
+	UriHash string `protobuf:"bytes,7,opt,name=uriHash,proto3" json:"uriHash,omitempty"`
+	// mintRestricted specifies whether NFT classification is restricts minting NFTs by others
+	MintRestricted bool `protobuf:"varint,8,opt,name=mintRestricted,proto3" json:"mintRestricted,omitempty"`
+	// burnRestricted specifies whether NFT classification restricts burning NFTs by others
+	BurnRestricted bool `protobuf:"varint,9,opt,name=burnRestricted,proto3" json:"burnRestricted,omitempty"`
+	// updateRestricted specifies whether NFT classification restricts updating NFTs by others
+	UpdateRestricted bool `protobuf:"varint,10,opt,name=updateRestricted,proto3" json:"updateRestricted,omitempty"`
+	// data is the app specific metadata of the NFT class. Optional
+	Data *types.Any `protobuf:"bytes,11,opt,name=data,proto3" json:"data,omitempty"`
+}
+
+func (m *Class) Reset()         { *m = Class{} }
+func (m *Class) String() string { return proto.CompactTextString(m) }
+func (*Class) ProtoMessage()    {}
+func (*Class) Descriptor() ([]byte, []int) {
+	return fileDescriptor_b3526443614ef418, []int{1}
+}
+func (m *Class) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *Class) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_Class.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *Class) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Class.Merge(m, src)
+}
+func (m *Class) XXX_Size() int {
+	return m.Size()
+}
+func (m *Class) XXX_DiscardUnknown() {
+	xxx_messageInfo_Class.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Class proto.InternalMessageInfo
+
+func (m *Class) GetCreator() string {
+	if m != nil {
+		return m.Creator
+	}
+	return ""
+}
+
+func (m *Class) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func (m *Class) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *Class) GetSymbol() string {
+	if m != nil {
+		return m.Symbol
+	}
+	return ""
+}
+
+func (m *Class) GetDescription() string {
+	if m != nil {
+		return m.Description
+	}
+	return ""
+}
+
+func (m *Class) GetUri() string {
+	if m != nil {
+		return m.Uri
+	}
+	return ""
+}
+
+func (m *Class) GetUriHash() string {
+	if m != nil {
+		return m.UriHash
+	}
+	return ""
+}
+
+func (m *Class) GetMintRestricted() bool {
+	if m != nil {
+		return m.MintRestricted
+	}
+	return false
+}
+
+func (m *Class) GetBurnRestricted() bool {
+	if m != nil {
+		return m.BurnRestricted
+	}
+	return false
+}
+
+func (m *Class) GetUpdateRestricted() bool {
+	if m != nil {
+		return m.UpdateRestricted
+	}
+	return false
+}
+
+func (m *Class) GetData() *types.Any {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*ClassMetadata)(nil), "devashishdxt.cryptonft.cryptonft.ClassMetadata")
+	proto.RegisterType((*Class)(nil), "devashishdxt.cryptonft.cryptonft.Class")
 }
 
 func init() { proto.RegisterFile("cryptonft/cryptonft.proto", fileDescriptor_b3526443614ef418) }
 
 var fileDescriptor_b3526443614ef418 = []byte{
-	// 268 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x64, 0x90, 0xbd, 0x4e, 0xc3, 0x30,
-	0x14, 0x85, 0x63, 0x28, 0x7f, 0x46, 0x20, 0x64, 0x31, 0xa4, 0x0c, 0x56, 0xc4, 0x80, 0x22, 0x24,
-	0x6c, 0x09, 0x78, 0x01, 0x60, 0x86, 0x21, 0x23, 0x9b, 0x13, 0xbb, 0x49, 0xa4, 0xd6, 0x8e, 0xec,
-	0x1b, 0xd4, 0xbc, 0x05, 0x8f, 0xc5, 0x46, 0x47, 0x46, 0x94, 0xbc, 0x08, 0x4a, 0x42, 0x9b, 0x40,
-	0xb7, 0xeb, 0xe3, 0xcf, 0xf2, 0x3d, 0x1f, 0x9e, 0x26, 0xb6, 0x2a, 0xc0, 0xe8, 0x19, 0xf0, 0xcd,
-	0xc4, 0x0a, 0x6b, 0xc0, 0x90, 0x40, 0xaa, 0x37, 0xe1, 0xb2, 0xdc, 0x65, 0x72, 0x09, 0x6c, 0xb8,
-	0xdd, 0x4c, 0x17, 0xd3, 0xd4, 0x98, 0x74, 0xae, 0x78, 0xc7, 0xc7, 0xe5, 0x8c, 0x0b, 0x5d, 0xf5,
-	0x8f, 0x2f, 0x3f, 0x11, 0x3e, 0x79, 0x9a, 0x0b, 0xe7, 0x9e, 0x15, 0x08, 0x29, 0x40, 0x10, 0x1f,
-	0x1f, 0x24, 0x56, 0x09, 0x30, 0xd6, 0x47, 0x01, 0x0a, 0x8f, 0xa2, 0xf5, 0x91, 0x5c, 0xe1, 0xd3,
-	0x45, 0xae, 0x21, 0x52, 0x0e, 0x6c, 0x9e, 0x80, 0x92, 0xfe, 0x4e, 0x80, 0xc2, 0xc3, 0xe8, 0x5f,
-	0xda, 0x72, 0x71, 0x69, 0xf5, 0x88, 0xdb, 0xed, 0xb9, 0xbf, 0x29, 0xb9, 0xc6, 0x67, 0x65, 0x21,
-	0x05, 0xa8, 0x11, 0x39, 0xe9, 0xc8, 0xad, 0x9c, 0x84, 0x78, 0xd2, 0x6e, 0xe7, 0xef, 0x05, 0x28,
-	0x3c, 0xbe, 0x3d, 0x67, 0x7d, 0x23, 0xb6, 0x6e, 0xc4, 0x1e, 0x74, 0x15, 0x75, 0xc4, 0xe3, 0xcb,
-	0x47, 0x4d, 0xd1, 0xaa, 0xa6, 0xe8, 0xbb, 0xa6, 0xe8, 0xbd, 0xa1, 0xde, 0xaa, 0xa1, 0xde, 0x57,
-	0x43, 0xbd, 0xd7, 0xfb, 0x34, 0x87, 0xac, 0x8c, 0x59, 0x62, 0x16, 0x7c, 0xec, 0xec, 0xd7, 0xe8,
-	0x4d, 0x2b, 0x77, 0x39, 0xe8, 0xe5, 0x50, 0x15, 0xca, 0xc5, 0xfb, 0xdd, 0x1f, 0x77, 0x3f, 0x01,
-	0x00, 0x00, 0xff, 0xff, 0x3a, 0xd5, 0x73, 0xd6, 0x82, 0x01, 0x00, 0x00,
+	// 366 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x52, 0xbd, 0x4e, 0xc3, 0x30,
+	0x18, 0xac, 0xd3, 0xdf, 0xb8, 0xa2, 0xaa, 0x2c, 0x84, 0x52, 0x86, 0x28, 0xea, 0x80, 0x22, 0x24,
+	0x12, 0x09, 0x78, 0x01, 0x60, 0x61, 0x81, 0xc1, 0x23, 0x9b, 0x93, 0xb8, 0x8d, 0xa5, 0x26, 0x8e,
+	0x6c, 0x07, 0x35, 0x6f, 0xc1, 0x63, 0xb1, 0x51, 0x36, 0x46, 0xd4, 0xbe, 0x08, 0x8a, 0xd3, 0x9f,
+	0xf0, 0x23, 0xda, 0xed, 0xbe, 0xf3, 0x45, 0xb9, 0x3b, 0x1d, 0x1c, 0x85, 0xa2, 0xc8, 0x14, 0x4f,
+	0x27, 0xca, 0xdf, 0x22, 0x2f, 0x13, 0x5c, 0x71, 0xe4, 0x44, 0xf4, 0x99, 0xc8, 0x98, 0xc9, 0x38,
+	0x9a, 0x2b, 0x6f, 0xf7, 0xba, 0x45, 0xa7, 0xa3, 0x29, 0xe7, 0xd3, 0x19, 0xf5, 0xb5, 0x3e, 0xc8,
+	0x27, 0x3e, 0x49, 0x8b, 0xea, 0xe3, 0xf1, 0x1b, 0x80, 0x47, 0x77, 0x33, 0x22, 0xe5, 0x03, 0x55,
+	0x24, 0x22, 0x8a, 0x20, 0x0b, 0x76, 0x43, 0x41, 0x89, 0xe2, 0xc2, 0x02, 0x0e, 0x70, 0x4d, 0xbc,
+	0x39, 0xd1, 0x19, 0x1c, 0x24, 0x2c, 0x55, 0x98, 0x4a, 0x25, 0x58, 0xa8, 0x68, 0x64, 0x19, 0x0e,
+	0x70, 0x7b, 0xf8, 0x07, 0x5b, 0xea, 0x82, 0x5c, 0xa4, 0x35, 0x5d, 0xb3, 0xd2, 0x7d, 0x67, 0xd1,
+	0x39, 0x1c, 0xe6, 0x59, 0x44, 0x14, 0xad, 0x29, 0x5b, 0x5a, 0xf9, 0x8b, 0x47, 0x2e, 0x6c, 0x95,
+	0xee, 0xac, 0xb6, 0x03, 0xdc, 0xfe, 0xe5, 0xb1, 0x57, 0x25, 0xf2, 0x36, 0x89, 0xbc, 0x9b, 0xb4,
+	0xc0, 0x5a, 0x31, 0x7e, 0x37, 0x60, 0x5b, 0x27, 0xfa, 0x27, 0xc9, 0x00, 0x1a, 0xac, 0x72, 0x6f,
+	0x62, 0x83, 0x45, 0x08, 0xc1, 0x56, 0x4a, 0x12, 0xaa, 0x7d, 0x9a, 0x58, 0x63, 0x74, 0x02, 0x3b,
+	0xb2, 0x48, 0x02, 0x3e, 0xd3, 0x9e, 0x4c, 0xbc, 0xbe, 0x90, 0x03, 0xfb, 0x11, 0x95, 0xa1, 0x60,
+	0x99, 0x62, 0x3c, 0xd5, 0x86, 0x4c, 0x5c, 0xa7, 0xd0, 0x10, 0x36, 0x73, 0xc1, 0xac, 0x8e, 0x7e,
+	0x29, 0x61, 0xe9, 0x24, 0x17, 0xec, 0x9e, 0xc8, 0xd8, 0xea, 0x56, 0x4e, 0xd6, 0xe7, 0x1f, 0x9d,
+	0xf6, 0x0e, 0xec, 0xd4, 0x3c, 0xb8, 0x53, 0xb8, 0xa7, 0xd3, 0xfe, 0xbe, 0x4e, 0x6f, 0x1f, 0x5f,
+	0x97, 0x36, 0x58, 0x2c, 0x6d, 0xf0, 0xb9, 0xb4, 0xc1, 0xcb, 0xca, 0x6e, 0x2c, 0x56, 0x76, 0xe3,
+	0x63, 0x65, 0x37, 0x9e, 0xae, 0xa7, 0x4c, 0xc5, 0x79, 0xe0, 0x85, 0x3c, 0xf1, 0xeb, 0x3b, 0x5c,
+	0xaf, 0xf4, 0xa2, 0x1c, 0xec, 0x7c, 0x37, 0x59, 0x5f, 0x15, 0x19, 0x95, 0x41, 0x47, 0xff, 0xe3,
+	0xea, 0x2b, 0x00, 0x00, 0xff, 0xff, 0xf5, 0x94, 0x39, 0x5b, 0xd6, 0x02, 0x00, 0x00,
 }
 
 func (m *ClassMetadata) Marshal() (dAtA []byte, err error) {
@@ -203,6 +345,120 @@ func (m *ClassMetadata) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *Class) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Class) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Class) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Data != nil {
+		{
+			size, err := m.Data.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintCryptonft(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x5a
+	}
+	if m.UpdateRestricted {
+		i--
+		if m.UpdateRestricted {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x50
+	}
+	if m.BurnRestricted {
+		i--
+		if m.BurnRestricted {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x48
+	}
+	if m.MintRestricted {
+		i--
+		if m.MintRestricted {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x40
+	}
+	if len(m.UriHash) > 0 {
+		i -= len(m.UriHash)
+		copy(dAtA[i:], m.UriHash)
+		i = encodeVarintCryptonft(dAtA, i, uint64(len(m.UriHash)))
+		i--
+		dAtA[i] = 0x3a
+	}
+	if len(m.Uri) > 0 {
+		i -= len(m.Uri)
+		copy(dAtA[i:], m.Uri)
+		i = encodeVarintCryptonft(dAtA, i, uint64(len(m.Uri)))
+		i--
+		dAtA[i] = 0x32
+	}
+	if len(m.Description) > 0 {
+		i -= len(m.Description)
+		copy(dAtA[i:], m.Description)
+		i = encodeVarintCryptonft(dAtA, i, uint64(len(m.Description)))
+		i--
+		dAtA[i] = 0x2a
+	}
+	if len(m.Symbol) > 0 {
+		i -= len(m.Symbol)
+		copy(dAtA[i:], m.Symbol)
+		i = encodeVarintCryptonft(dAtA, i, uint64(len(m.Symbol)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.Name) > 0 {
+		i -= len(m.Name)
+		copy(dAtA[i:], m.Name)
+		i = encodeVarintCryptonft(dAtA, i, uint64(len(m.Name)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.Id) > 0 {
+		i -= len(m.Id)
+		copy(dAtA[i:], m.Id)
+		i = encodeVarintCryptonft(dAtA, i, uint64(len(m.Id)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Creator) > 0 {
+		i -= len(m.Creator)
+		copy(dAtA[i:], m.Creator)
+		i = encodeVarintCryptonft(dAtA, i, uint64(len(m.Creator)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintCryptonft(dAtA []byte, offset int, v uint64) int {
 	offset -= sovCryptonft(v)
 	base := offset
@@ -221,6 +477,56 @@ func (m *ClassMetadata) Size() (n int) {
 	var l int
 	_ = l
 	l = len(m.Creator)
+	if l > 0 {
+		n += 1 + l + sovCryptonft(uint64(l))
+	}
+	if m.MintRestricted {
+		n += 2
+	}
+	if m.BurnRestricted {
+		n += 2
+	}
+	if m.UpdateRestricted {
+		n += 2
+	}
+	if m.Data != nil {
+		l = m.Data.Size()
+		n += 1 + l + sovCryptonft(uint64(l))
+	}
+	return n
+}
+
+func (m *Class) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Creator)
+	if l > 0 {
+		n += 1 + l + sovCryptonft(uint64(l))
+	}
+	l = len(m.Id)
+	if l > 0 {
+		n += 1 + l + sovCryptonft(uint64(l))
+	}
+	l = len(m.Name)
+	if l > 0 {
+		n += 1 + l + sovCryptonft(uint64(l))
+	}
+	l = len(m.Symbol)
+	if l > 0 {
+		n += 1 + l + sovCryptonft(uint64(l))
+	}
+	l = len(m.Description)
+	if l > 0 {
+		n += 1 + l + sovCryptonft(uint64(l))
+	}
+	l = len(m.Uri)
+	if l > 0 {
+		n += 1 + l + sovCryptonft(uint64(l))
+	}
+	l = len(m.UriHash)
 	if l > 0 {
 		n += 1 + l + sovCryptonft(uint64(l))
 	}
@@ -368,6 +674,376 @@ func (m *ClassMetadata) Unmarshal(dAtA []byte) error {
 			}
 			m.UpdateRestricted = bool(v != 0)
 		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Data", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCryptonft
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthCryptonft
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthCryptonft
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Data == nil {
+				m.Data = &types.Any{}
+			}
+			if err := m.Data.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipCryptonft(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthCryptonft
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *Class) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCryptonft
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: Class: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: Class: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCryptonft
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCryptonft
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCryptonft
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Creator = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCryptonft
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCryptonft
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCryptonft
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Id = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCryptonft
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCryptonft
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCryptonft
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Name = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Symbol", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCryptonft
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCryptonft
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCryptonft
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Symbol = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCryptonft
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCryptonft
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCryptonft
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Description = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 6:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Uri", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCryptonft
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCryptonft
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCryptonft
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Uri = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 7:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field UriHash", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCryptonft
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCryptonft
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCryptonft
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.UriHash = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 8:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field MintRestricted", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCryptonft
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.MintRestricted = bool(v != 0)
+		case 9:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field BurnRestricted", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCryptonft
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.BurnRestricted = bool(v != 0)
+		case 10:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field UpdateRestricted", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCryptonft
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.UpdateRestricted = bool(v != 0)
+		case 11:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Data", wireType)
 			}

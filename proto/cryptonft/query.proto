@@ -4,6 +4,7 @@ package devashishdxt.cryptonft.cryptonft;
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
+import "cryptonft/cryptonft.proto";
 import "cryptonft/params.proto";
 // this line is used by starport scaffolding # 1
 
@@ -15,7 +16,13 @@ service Query {
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/devashishdxt/cryptonft/cryptonft/params";
   }
-  // this line is used by starport scaffolding # 2
+
+  // Queries a class with the given `classId`.
+	rpc Class(QueryClassRequest) returns (QueryClassResponse) {
+		option (google.api.http).get = "/devashishdxt/cryptonft/cryptonft/class/{classId}";
+	}
+
+// this line is used by starport scaffolding # 2
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -25,6 +32,17 @@ message QueryParamsRequest {}
 message QueryParamsResponse {
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
+}
+
+// QueryClassRequest is request type for the Query/Class RPC method.
+message QueryClassRequest {
+  string classId = 1;
+}
+
+// QueryClassResponse is response type for the Query/Class RPC method.
+message QueryClassResponse {
+  // class holds the class with the given `classId`.
+  Class class = 1;
 }
 
 // this line is used by starport scaffolding # 3
