@@ -3,7 +3,7 @@ package devashishdxt.cryptonft.cryptonft;
 
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/devashishdxt/crypto-nft/x/cryptonft/types";
+option go_package = "x/cryptonft/types";
 
 // Params defines the parameters for the module.
 message Params {

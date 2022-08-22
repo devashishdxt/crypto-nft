@@ -5,7 +5,7 @@ import "gogoproto/gogo.proto";
 import "cryptonft/params.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
-option go_package = "github.com/devashishdxt/crypto-nft/x/cryptonft/types";
+option go_package = "x/cryptonft/types";
 
 // GenesisState defines the cryptonft module's genesis state.
 message GenesisState {

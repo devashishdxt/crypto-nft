@@ -3,7 +3,7 @@ package devashishdxt.cryptonft.compatnft;
 
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/devashishdxt/crypto-nft/x/compatnft/types";
+option go_package = "x/compatnft/types";
 
 message DenomMetadata {
     string schema = 1;

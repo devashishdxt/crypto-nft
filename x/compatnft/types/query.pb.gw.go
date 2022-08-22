@@ -749,19 +749,19 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 }
 
 var (
-	pattern_Query_Params_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"devashishdxt", "cryptonft", "compatnft", "params"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_Params_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"devashishdxt", "cryptonft", "compatnft", "params"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_Supply_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5}, []string{"devashishdxt", "cryptonft", "compatnft", "collections", "denom_id", "supply"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_Supply_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5}, []string{"devashishdxt", "cryptonft", "compatnft", "collections", "denom_id", "supply"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_Owner_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"devashishdxt", "cryptonft", "compatnft", "nfts"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_Owner_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"devashishdxt", "cryptonft", "compatnft", "nfts"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_Collection_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"devashishdxt", "cryptonft", "compatnft", "collections", "denom_id"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_Collection_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"devashishdxt", "cryptonft", "compatnft", "collections", "denom_id"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_Denom_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"devashishdxt", "cryptonft", "compatnft", "denoms", "denom_id"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_Denom_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"devashishdxt", "cryptonft", "compatnft", "denoms", "denom_id"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_Denoms_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"devashishdxt", "cryptonft", "compatnft", "denoms"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_Denoms_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"devashishdxt", "cryptonft", "compatnft", "denoms"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_NFT_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 1, 0, 4, 1, 5, 5}, []string{"devashishdxt", "cryptonft", "compatnft", "nfts", "denom_id", "token_id"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_NFT_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 1, 0, 4, 1, 5, 5}, []string{"devashishdxt", "cryptonft", "compatnft", "nfts", "denom_id", "token_id"}, "", runtime.AssumeColonVerbOpt(false)))
 )
 
 var (
