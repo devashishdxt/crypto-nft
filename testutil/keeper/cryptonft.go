@@ -19,7 +19,7 @@ import (
 )
 
 func CryptonftKeeper(t testing.TB, accountKeeper nft.AccountKeeper, bankKeeper nft.BankKeeper) (*keeper.Keeper, sdk.Context) {
-	storeKey := sdk.NewKVStoreKey(types.StoreKey)
+	storeKey := storetypes.NewKVStoreKey(types.StoreKey)
 	memStoreKey := storetypes.NewMemoryStoreKey(types.MemStoreKey)
 
 	db := tmdb.NewMemDB()

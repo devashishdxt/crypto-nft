@@ -5,7 +5,6 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/codec"
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
-	"github.com/cosmos/cosmos-sdk/store"
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/nft"
@@ -19,11 +18,11 @@ import (
 func CompatnftKeeper(t testing.TB, accountKeeper nft.AccountKeeper, bankKeeper nft.BankKeeper) (*keeper.Keeper, sdk.Context) {
 	cryptoNftKeeper, ctx := CryptonftKeeper(t, accountKeeper, bankKeeper)
 
-	storeKey := sdk.NewKVStoreKey(types.StoreKey)
+	storeKey := storetypes.NewKVStoreKey(types.StoreKey)
 	memStoreKey := storetypes.NewMemoryStoreKey(types.MemStoreKey)
 
 	db := tmdb.NewMemDB()
-	stateStore := ctx.MultiStore().(store.CommitMultiStore)
+	stateStore := ctx.MultiStore().(sdk.CommitMultiStore)
 	stateStore.MountStoreWithDB(storeKey, storetypes.StoreTypeIAVL, db)
 	stateStore.MountStoreWithDB(memStoreKey, storetypes.StoreTypeMemory, nil)
 	require.NoError(t, stateStore.LoadLatestVersion())

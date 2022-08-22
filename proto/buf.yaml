@@ -1,0 +1,14 @@
+version: v1
+deps:
+  - buf.build/googleapis/googleapis
+  - buf.build/cosmos/gogo-proto
+  - buf.build/cosmos/cosmos-sdk
+build:
+  excludes:
+    - google/protobuf
+lint:
+  use:
+    - DEFAULT
+breaking:
+  use:
+    - FILE
